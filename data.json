@@ -1,0 +1,18 @@
+{
+    "price": 61750.33,
+    "users": [
+        {
+            "name": "Paz",
+            "amount": 40
+        },
+        {
+            "name": "Flo",
+            "amount": 15
+        },
+        {
+            "name": "Boris",
+            "amount": 40
+        }
+    ]
+}
+
