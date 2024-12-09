@@ -1,7 +1,5 @@
 from fastapi import Request, FastAPI
 from typing import List, Tuple
-import requests
-import json
 
 app = FastAPI()
 
@@ -13,13 +11,20 @@ def create_tuple(data: dict) -> List[Tuple[str, int]]:
 
 def get_git_hash():
     import subprocess
+
     git_tag = subprocess.check_output(["git", "rev-parse", "--short", "HEAD"]).strip().decode("utf-8")
+    
     return git_tag
 
-def btc_price():
+def get_btc_data():
+    import requests
+    import json
+
     response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
     data = response.json()
+
     return data['bpi']['USD']['rate_float']
+
 
 @app.post("/")
 async def get_json(request: Request):
@@ -46,7 +51,8 @@ async def get_json(request: Request):
 
 @app.get("/btc")
 async def btc_price():
-    return {"price": f'{btc_price():.2f}'}
+    price_data = float(get_btc_data())
+    return {"price": f"{price_data:.2f}"}
 
 
 @app.get("/health")
