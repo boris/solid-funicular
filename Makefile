@@ -17,5 +17,8 @@ run:
 json_test:
 	curl -X POST -H "Content-Type: application/json" -d @example_data.json http://localhost:8000
 
+local_check:
+	@curl -X POST -H "Content-Type: application/json" -d @data.json http://localhost:8000
+
 check:
 	@curl -X POST -H "Content-Type: application/json" -d @data.json https://btc-api.borisquiroz.dev
