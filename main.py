@@ -20,10 +20,10 @@ def get_btc_data():
     import requests
     import json
 
-    response = requests.get('https://api.coindesk.com/v1/bpi/currentprice.json')
+    response = requests.get('https://data-api.coindesk.com/spot/v1/latest/tick?market=coinbase&instruments=BTC-USD')
     data = response.json()
 
-    return data['bpi']['USD']['rate_float']
+    return float(data['Data']['BTC-USD']['PRICE'])
 
 
 @app.post("/")
